@@ -4,10 +4,6 @@ from api.users.schemas import AuthUser
 from src.models import User
 
 
-def hash_password(password: str) -> bytes:
-    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-
-
 def validate_password(password: str, hashed_password: bytes) -> bool:
     return bcrypt.checkpw(
         password=password.encode(),
