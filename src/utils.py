@@ -26,8 +26,8 @@ def auth_user(user: User, user_schema: AuthUser) -> bool | None:
 
 async def get_user_or_exc(session: AsyncSession, user_schema: AuthUser) -> User | None:
     user = await get_user_by_username(session, user_schema.username)
-    auth_user(user, user_schema)
     if user:
+        auth_user(user, user_schema)
         return user
     raise fastapi.HTTPException(
         status_code=fastapi.status.HTTP_404_NOT_FOUND,
