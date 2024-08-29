@@ -26,3 +26,9 @@ async def create_note(session: AsyncSession, note_schema: CreateNote, user_id: i
     session.add(note)
     await session.commit()
     return note
+
+
+async def get_note(session: AsyncSession, note_id: int, user_id: int) -> Note | None:
+    sql = select(Note).where(Note.note_id == note_id and Note.user_id == user_id)
+    result: Result = await session.execute(sql)
+    return result.scalar()
