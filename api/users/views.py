@@ -21,5 +21,5 @@ async def on_create_user(user_schema: CreateUser,
 @router.post('/notes/')
 async def on_all_notes(user_schema: AuthUser,
                        session: AsyncSession = Depends(db_tools.session_dependency)):
-    user = await get_user_or_exc(session, user_schema.username)
+    user = await get_user_or_exc(session, user_schema)
     return user.notes

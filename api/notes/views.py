@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.notes.schemas import GetNote, CreateNote
 from api.users.schemas import AuthUser
-from crud import create_note
+from crud import create_note, get_note
 from database import db_tools
 from utils import get_user_or_exc
 
@@ -16,7 +16,7 @@ router = fastapi.APIRouter(prefix='/notes', tags=['posts'])
 async def on_create_note(user_schema: AuthUser,
                          note_schema: CreateNote,
                          session: AsyncSession = Depends(db_tools.session_dependency)):
-    user = await get_user_or_exc(session, username=user_schema.username)
+    user = await get_user_or_exc(session, user_schema)
     return await create_note(session, note_schema, user.user_id)
 
 
