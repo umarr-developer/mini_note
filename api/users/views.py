@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api.users.schemas import GetUser, CreateUser, AuthUser
 from database import db_tools
 from src.crud import create_user, get_user_by_username
+from utils import auth_user
 
 router = fastapi.APIRouter(prefix='/users', tags=['users'])
 
@@ -28,7 +29,12 @@ async def on_all_notes(user_schema: AuthUser,
                        session: AsyncSession = Depends(db_tools.session_dependency)):
     user = await get_user_by_username(session, user_schema.username)
     if user:
-        return user.notes
+        if auth_user(user, user_schema):
+            return user.notes
+        raise fastapi.HTTPException(
+            status_code=fastapi.status.HTTP_401_UNAUTHORIZED,
+            detail='invalid password'
+        )
     raise fastapi.HTTPException(
         status_code=fastapi.status.HTTP_404_NOT_FOUND,
         detail='user not found'
