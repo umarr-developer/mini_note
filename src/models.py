@@ -16,8 +16,8 @@ class User(Base):
 class Note(Base):
     __tablename__ = 'notes'
 
-    note_id = Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    title = Mapped[str] = mapped_column(String(length=32))
-    body = Mapped[str] = mapped_column()
+    note_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    title: Mapped[str] = mapped_column(String(length=32))
+    body: Mapped[str] = mapped_column()
     user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'))
     user: Mapped[User] = relationship(back_populates='notes')
