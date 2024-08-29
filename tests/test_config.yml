@@ -1,0 +1,9 @@
+db:
+    database: 'test-database'
+    host: 'test-host'
+    user: 'test-user'
+    password: 'test-password'
+
+jwt:
+    private_key: 'test-private-key'
+    public_key: 'test-public-key'
