@@ -5,7 +5,7 @@ from sqlalchemy.orm import joinedload
 from api.notes.schemas import CreateNote
 from api.users.schemas import CreateUser
 from src.models import User, Note
-from src.utils import hash_password
+from src.hash import hash_password
 
 
 async def create_user(session: AsyncSession, user_schema: CreateUser) -> User:
