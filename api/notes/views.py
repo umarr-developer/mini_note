@@ -18,4 +18,12 @@ async def on_create_note(user_schema: AuthUser,
                          session: AsyncSession = Depends(db_tools.session_dependency)):
     user = await get_user_or_exc(session, username=user_schema.username)
     return await create_note(session, note_schema, user.user_id)
- 
+
+
+@router.post('/{note_id}',
+             response_model=GetNote)
+async def on_get_note(note_id: int,
+                      user_schema: AuthUser,
+                      session: AsyncSession = Depends(db_tools.session_dependency)):
+    user = await get_user_or_exc(session, user_schema)
+    return await get_note(session, note_id, user.user_id)
