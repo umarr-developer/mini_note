@@ -3,7 +3,3 @@ db:
     host: 'localhost'
     user: 'postgres'
     password: ''
-
-jwt:
-    private_key: ''
-    public_key: ''
