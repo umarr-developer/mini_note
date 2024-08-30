@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api.users.schemas import AuthUser, CreateUser
 from crud import get_user_by_username, create_user
 from src.models import User
+from src.speller import speller_query
 
 
 def validate_password(password: str, hashed_password: bytes) -> bool:
@@ -43,3 +44,10 @@ async def create_user_or_exc(session: AsyncSession, user_schema: CreateUser) -> 
         status_code=fastapi.status.HTTP_401_UNAUTHORIZED,
         detail='this username is already taken'
     )
+
+
+async def correct_note(note_body: str) -> str:
+    speller = await speller_query(note_body)
+    for word in speller:
+        note_body = note_body[:word['pos']] + word['s'][0] + note_body[word['pos'] + word['len']:]
+    return note_body
