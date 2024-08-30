@@ -3,7 +3,7 @@ import fastapi
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.users.schemas import AuthUser, CreateUser
-from crud import get_user_by_username, create_user
+from src.crud import get_user_by_username, create_user
 from src.models import User
 from src.speller import speller_query
 

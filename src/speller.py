@@ -1,5 +1,4 @@
 import aiohttp
-from sqlalchemy.testing import assert_warnings
 
 SPELLER_URL = 'https://speller.yandex.net/services/spellservice.json/checkText'
 
