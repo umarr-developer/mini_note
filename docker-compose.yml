@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  mini_note:
+    image: mini_note
+    container_name: mini_note
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/
+    command: python3 'home/mini_note/app.py'
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DATABASE: mini_note
+      POSTGRES_PASSWORD: qal3ko8tFgzyuL3vBeQW55UFNN9KcLJfeRisBhugm3NYc0WoUIKbzThf8sn0SWKY
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  dbdata: null
