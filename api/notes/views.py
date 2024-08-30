@@ -6,13 +6,13 @@ from api.notes.schemas import GetNote, CreateNote
 from api.users.schemas import AuthUser
 from crud import create_note, get_note
 from database import db_tools
-from utils import get_user_or_exc
+from utils import get_user_or_exc, correct_note
 
 router = fastapi.APIRouter(prefix='/notes', tags=['posts'])
 
 
 @router.post('/create/',
-             response_model=list[GetNote])
+             response_model=GetNote)
 async def on_create_note(user_schema: AuthUser,
                          note_schema: CreateNote,
                          session: AsyncSession = Depends(db_tools.session_dependency)):
