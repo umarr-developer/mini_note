@@ -10,7 +10,9 @@ services:
       - db
     volumes:
       - .:/usr/src/
-    command: python3 'home/mini_note/app.py'
+    command: bash -c "cd home/mini_note/
+      && alembic upgrade head
+      && python3 app.py"
 
   db:
     image: postgres:latest
