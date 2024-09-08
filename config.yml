@@ -1,5 +1,5 @@
 db:
-    database: 'mini_note'
+    database: 'postgres'
     host: 'db'
     user: 'postgres'
     password: 'qal3ko8tFgzyuL3vBeQW55UFNN9KcLJfeRisBhugm3NYc0WoUIKbzThf8sn0SWKY'
